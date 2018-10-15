@@ -29,13 +29,13 @@ class LinkedList(Node):
 
 		return tail
 
-	def _find_penultimate(self):
+	def _find_penultimate(self, search=None):
 
 		penult = None
 		current = self.head
 
 		while not penult:
-			if current.next.next == None:
+			if current.next.next == search:
 				penult = current
 
 			else:
@@ -80,8 +80,17 @@ class LinkedList(Node):
 		tail = pen_ultimate.next
 		pen_ultimate.next = None
 
+		self.length -= 1
+
 		return tail
 		
 
 	def remove_middle(self, data):
-		pass
+		
+		prev = _find_penultimate(data)
+		search = prev.next
+
+		prev.next = search.next
+		search.next = None
+
+		return search
